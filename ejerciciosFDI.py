@@ -126,3 +126,16 @@ print(search_word(palabras, wrd.lower()))
 print(mayusculas(palabras))
 print(numeros(redaccion))
 print(infinitivo(palabras))
+
+#Ejercicio 12
+
+def numMasAlto():
+    lista= [1, 14, 56, 43, 23, 46, 58, 123, 67]
+    posicion=-1
+    numero=[]
+    for n in lista:
+        if n > posicion:
+         posicion= n
+         numero=n
+    return numero
+print(numMasAlto())
