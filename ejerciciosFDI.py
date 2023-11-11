@@ -14,7 +14,7 @@ encuentra en el texto.
 - La cantidad de palabras que comienzan con vocal y la cantidad de palabras que
 comienzan con consonante.
 - Imprimir todas las palabras que terminan en infinitivo (terminadas en ar er o ir).
-"""
+
 def redaccion():
     text= input("Ingrese el texto: ")
     return text
@@ -139,3 +139,84 @@ def numMasAlto():
          numero=n
     return numero
 print(numMasAlto())
+"""
+#3)Realice un programa a través el cual pueda ingresar información de vinos. De cada vino se conoce su nombre, año 
+#de cosecha, tipo de uva y su valor de costo. La carga finaliza cuando se ingresa 'XXX'
+#Luego deberá contar cuantos vinos son de la cosecha 2000 o superior.
+#También indicar el valor total de todos los vinos del tipo 'Malbec'
+#Por ultimo calcular promedio del valor de los vinos ingresados anteriormente donde su año de cosecha esté en el rango
+#2010 a 2022.
+#Nota general: Se requiere utilizar funciones y el uso de un menú para realizar las invocaciones correspondientes.
+
+def carga_de_datos():
+    vinos=[]
+    nombre=input("Ingrese el nombre del vino: ")
+    while nombre != "XXX":
+        año= int(input("Ingrese el año de la cosecha: "))
+        tipo= input("Ingrese el tipo de uva: ")
+        precio= float(input("Ingrese el costo del vino: "))
+        vinos.append([nombre, año, tipo, precio])
+        nombre=input("Ingrese el nombre del vino: ")
+    return vinos
+
+def cosechas_despues_2000(vinos2000):
+    after2000= []
+    for v in vinos2000:
+        if v[1] >= 2000:
+            after2000.append(v)
+    if len(after2000)>0:
+        print("Hay " + str(len(after2000))+ " vinos que son de cosechas después del año 2000")
+    else:
+        print("No hay vinos de cosecha a partir del año 2000")
+
+def tiposMalbec(vinosMalbec):
+    malbec=[]
+    for v in vinosMalbec:
+        if v[2].lower()== "Malbec".lower():
+            malbec.append(v)
+    return malbec
+
+def valor_total_malbec(malb):
+    suma=0
+    for v in malb:
+        suma= suma + v[3]
+    return suma
+def promedioDelRango(vinos2010a2022):
+    suma=0
+    vin=[]
+    for v in vinos2010a2022:
+        if v[1]>=2010 and v[1]<=2022:
+            suma= suma + v[3]
+            vin.append(v)
+    prom= suma/len(vin)
+    return prom
+#ejecuciones
+#bodegaDeVinos= carga_de_datos()
+bodegaDeVinos=[["Elemento",2001,"malbec",2050],["cosecha tardia",2010,"Cabernet",1500],["Luigi Vosca",1995,"malbec",11550],["Benjamin Nieto",2017,"Cabernet",6500],["Santa Julia",2016,"blanco dulce",2600]]
+tipM= tiposMalbec(bodegaDeVinos)
+
+#Menú
+def opcionesMenu():
+    print("1-Lista de todos los vinos")
+    print("2-Cantidad de vinos a partir del año 2000")
+    print("3-Valor total de los vinos Malbec")
+    print("4-Promedio del valor de los vinos entre los años 2010 a 2022")
+    print("5-Salir")
+
+opcionesMenu()
+opciones= input("Ingrese una opción del menú: ")
+while opciones != "5":
+    if opciones == "1":
+        for x in bodegaDeVinos:
+            print(x[0],"-Año de cosecha: "+ str(x[1]),"-"+ x[2], "- $"+str(x[3]))
+    elif opciones == "2":
+        cosechas_despues_2000(bodegaDeVinos)
+    elif opciones == "3":
+        print("El costo del valor total de vinos de tipo Malbec es: " + str(valor_total_malbec(tipM)))
+    elif opciones == "4":
+        print("El promedio es: "+ str(promedioDelRango(bodegaDeVinos)))
+    else:
+        print("La opción ingresada no corresponde al menú")
+    opcionesMenu()
+    opciones= input("Ingrese una opción del menú: ")
+    
